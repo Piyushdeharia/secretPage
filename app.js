@@ -22,8 +22,8 @@ const userSchema=new mongoose.Schema({
 })
 
 //level two authenticaton
-//here the unguessable string is passed as a cipher key as well as decipher key 
-var secret = "Thisisourlittlesecret.";
+//here the unguessable string is passed as a cipher key as well as decipher key and stored in the env file
+
 //encrypt package as a plugin is applied to the schema before creating mongoose model
 //for encrypting particular field encryptedFields is used to specify
 userSchema.plugin(encrypt, { secret: process.env.SECRET, encryptedFields: ['password']});
