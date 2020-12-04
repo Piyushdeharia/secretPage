@@ -1,4 +1,7 @@
 //jshint esversion:6
+//require the configuration dotenv
+require('dotenv').config()
+
 const express = require("express");
 const bodyParser=require("body-parser");
 const ejs=require("ejs");
@@ -23,7 +26,7 @@ const userSchema=new mongoose.Schema({
 var secret = "Thisisourlittlesecret.";
 //encrypt package as a plugin is applied to the schema before creating mongoose model
 //for encrypting particular field encryptedFields is used to specify
-userSchema.plugin(encrypt, { secret: secret, encryptedFields: ['password']});
+userSchema.plugin(encrypt, { secret: process.env.SECRET, encryptedFields: ['password']});
 //whenever save is used for the password field, the encrypt plugin automatically encrypt the field.
 //whenever find is used for the password field, the encrpyt plugin autotmatically decrypt the field. 
 const User= mongoose.model("User",userSchema);
